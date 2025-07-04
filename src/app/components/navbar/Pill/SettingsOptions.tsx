@@ -1,0 +1,46 @@
+import React from "react";
+import {
+  ClipboardIcon,
+  DocumentDuplicateIcon,
+  EllipsisVerticalIcon,
+  PencilSquareIcon,
+  TrashIcon,
+} from "@heroicons/react/24/outline";
+import { FlagIcon } from "@heroicons/react/20/solid";
+
+const SettingsOptions = () => {
+  return (
+    <>
+      <button>
+        <EllipsisVerticalIcon className="size-6 text-gray ml-1.5" />
+      </button>
+      <div
+        className="z-10 bg-white border border-border rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.4)] w-56 text-sm"
+        style={{ position: "fixed", top: 0, left: 0 }}>
+        <div className="bg-aliceBlue border-b border-border rounded-t-xl p-3">
+          <span className="text-base">Settings</span>
+        </div>
+        <div className="p-3 space-y-3">
+          <p className="flex items-center">
+            <FlagIcon className="size-4 text-blue mr-2" /> Set as first page
+          </p>
+          <p className="flex items-center">
+            <PencilSquareIcon className="size-4 text-gray mr-2" /> Rename
+          </p>
+          <p className="flex items-center">
+            <ClipboardIcon className="size-4 text-gray mr-2" /> Copy
+          </p>
+          <p className="flex items-center">
+            <DocumentDuplicateIcon className="size-4 text-gray mr-2" /> Duplicate
+          </p>
+          <hr className="border-border" />
+          <p className="flex items-center text-red">
+            <TrashIcon className="size-4 mr-2" /> Delete
+          </p>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default SettingsOptions;

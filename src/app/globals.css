@@ -7,6 +7,11 @@
   --border: #e1e1e1;
   --primaryText: #1a1a1a;
   --tangerine: #f59d0e;
+  --gray: #9da4b2;
+  --waikawaGray: #677289;
+  --manateeGray: #8c93a1;
+  --blue: #2f72e2;
+  --red: #ef494f;
 }
 
 @theme inline {
@@ -16,6 +21,11 @@
   --color-border: var(--border);
   --color-primaryText: var(--primaryText);
   --color-tangerine: var(--tangerine);
+  --color-gray: var(--gray);
+  --color-blue: var(--blue);
+  --color-red: var(--red);
+  --color-waikawaGray: var(--waikawaGray);
+  --color-manateeGray: var(--manateeGray);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
