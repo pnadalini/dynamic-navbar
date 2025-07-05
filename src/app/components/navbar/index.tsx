@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import Pill from "./Pill/Pill";
 import { PageTypes } from "./types";
+import { PlusIcon } from "@heroicons/react/24/outline";
+import { defaultPillClasses } from "./Pill/utils";
 
 const initialPages = [
   {
@@ -45,6 +47,12 @@ const Navbar = () => {
 
         return <Pill key={id} {...page} onClick={handlePageChange} />;
       })}
+      <button
+        className={`${defaultPillClasses} bg-white hover:bg-white/35 text-primaryText cursor-pointer shadow-mini`}
+        onClick={() => {}}>
+        <PlusIcon className="size-5 mr-1.5" />
+        Add page
+      </button>
     </div>
   );
 };

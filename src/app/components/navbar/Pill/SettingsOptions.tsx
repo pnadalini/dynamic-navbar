@@ -38,7 +38,7 @@ const SettingsOptions = ({ containerRef, isOpen }: Props) => {
   return (
     <div
       ref={settingsRef}
-      className="z-10 bg-white border border-border rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.4)] w-56 text-sm fixed top-0 left-0"
+      className="z-10 bg-white border border-border rounded-xl shadow-mini w-56 text-sm fixed top-0 left-0"
       style={{
         transform: `translate(${position.left}px, ${position.top}px)`,
       }}>

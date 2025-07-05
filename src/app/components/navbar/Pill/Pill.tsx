@@ -7,16 +7,17 @@ import {
   EllipsisVerticalIcon,
   InformationCircleIcon,
 } from "@heroicons/react/24/outline";
+import { defaultPillClasses } from "./utils";
 
 interface Props {
   children: React.ReactNode;
   id: number;
-  isActive: boolean;
+  isActive?: boolean;
   type: PageTypes;
   onClick: (id: number) => void;
 }
 
-const Pill = ({ children, id, type, isActive, onClick }: Props) => {
+const Pill = ({ children, id, type, onClick, isActive = false }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
@@ -30,15 +31,15 @@ const Pill = ({ children, id, type, isActive, onClick }: Props) => {
   })();
 
   const pillColors = isActive
-    ? "bg-white text-primaryText focus:border focus:border-blue focus:ring-[1.5px] focus:ring-blue/25"
-    : "bg-gray/15 text-waikawaGray hover:bg-gray/35";
+    ? "bg-white text-primaryText focus:border focus:border-blue focus:ring-[1.5px] focus:ring-blue/25 cursor-default shadow-mini"
+    : "bg-gray/15 text-waikawaGray hover:bg-gray/35 cursor-pointer";
   const iconColor = isActive ? "text-tangerine" : "text-manateeGray";
 
   return (
     <div
       ref={ref}
       role="button"
-      className={`flex items-center border border-border px-2.5 py-1 rounded-lg cursor-pointer text-sm ${pillColors}`}
+      className={`${defaultPillClasses} ${pillColors}`}
       onClick={(e) => {
         e.preventDefault();
         onClick(id);
@@ -51,11 +52,12 @@ const Pill = ({ children, id, type, isActive, onClick }: Props) => {
       {isActive ? (
         <>
           <button
+            className="ml-1.5 cursor-pointer"
             onClick={(e) => {
               e.stopPropagation();
               setIsSettingsOpen(!isSettingsOpen);
             }}>
-            <EllipsisVerticalIcon className="size-6 text-gray ml-1.5 cursor-pointer" />
+            <EllipsisVerticalIcon className="size-6 text-gray" />
           </button>
           <SettingsOptions containerRef={ref} isOpen={isSettingsOpen} />
         </>
