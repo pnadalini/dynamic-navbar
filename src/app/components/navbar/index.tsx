@@ -31,13 +31,19 @@ const initialPages = [
 ];
 
 const Navbar = () => {
-  const [pages] = useState(initialPages);
+  const [pages, setPages] = useState(initialPages);
+
+  const handlePageChange = (pageId: number) => {
+    const updatedPages = initialPages.map((page) => ({ ...page, isActive: pageId === page.id }));
+    setPages(updatedPages);
+  };
+
   return (
     <div className="flex w-full h-20 p-5 bg-aliceBlue border border-border absolute bottom-0 left-0 right-0 space-x-2">
       {pages.map((page) => {
-        const { id, ...rest } = page;
+        const { id } = page;
 
-        return <Pill key={id} {...rest} />;
+        return <Pill key={id} {...page} onClick={handlePageChange} />;
       })}
     </div>
   );

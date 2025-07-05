@@ -1,19 +1,25 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { PageTypes } from "../types";
 import SettingsOptions from "./SettingsOptions";
 import {
   CheckCircleIcon,
   DocumentTextIcon,
+  EllipsisVerticalIcon,
   InformationCircleIcon,
 } from "@heroicons/react/24/outline";
 
 interface Props {
   children: React.ReactNode;
+  id: number;
   isActive: boolean;
   type: PageTypes;
+  onClick: (id: number) => void;
 }
 
-const Pill = ({ children, type, isActive }: Props) => {
+const Pill = ({ children, id, type, isActive, onClick }: Props) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+
   const Icon = (() => {
     const iconMap = {
       [PageTypes.Info]: InformationCircleIcon,
@@ -30,12 +36,30 @@ const Pill = ({ children, type, isActive }: Props) => {
 
   return (
     <div
+      ref={ref}
       role="button"
-      className={`flex items-center px-2.5 py-1 border border-border rounded-lg cursor-pointer text-sm ${pillColors}`}>
+      className={`flex items-center border border-border px-2.5 py-1 rounded-lg cursor-pointer text-sm ${pillColors}`}
+      onClick={(e) => {
+        e.preventDefault();
+        onClick(id);
+        setIsSettingsOpen(false);
+      }}>
       <Icon className={`${iconColor} size-5 mr-1.5`} />
 
       {children}
-      {isActive ? <SettingsOptions /> : null}
+
+      {isActive ? (
+        <>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsSettingsOpen(!isSettingsOpen);
+            }}>
+            <EllipsisVerticalIcon className="size-6 text-gray ml-1.5 cursor-pointer" />
+          </button>
+          <SettingsOptions containerRef={ref} isOpen={isSettingsOpen} />
+        </>
+      ) : null}
     </div>
   );
 };
