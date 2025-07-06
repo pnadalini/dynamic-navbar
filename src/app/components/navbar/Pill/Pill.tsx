@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
-import { PageTypes } from "../types";
+import { Reorder } from "framer-motion";
+import { IPage, PageTypes } from "../types";
 import SettingsOptions from "./SettingsOptions";
 import {
   CheckCircleIcon,
@@ -10,14 +11,12 @@ import {
 import { defaultPillClasses } from "./utils";
 
 interface Props {
-  children: React.ReactNode;
-  id: number;
-  isActive?: boolean;
-  type: PageTypes;
+  page: IPage;
   onClick: (id: number) => void;
 }
 
-const Pill = ({ children, id, type, onClick, isActive = false }: Props) => {
+const Pill = ({ page, onClick }: Props) => {
+  const { text, id, type, isActive = false } = page;
   const ref = useRef<HTMLDivElement>(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
@@ -31,23 +30,25 @@ const Pill = ({ children, id, type, onClick, isActive = false }: Props) => {
   })();
 
   const pillColors = isActive
-    ? "bg-white text-primaryText focus:border focus:border-blue focus:ring-[1.5px] focus:ring-blue/25 cursor-default shadow-mini"
-    : "bg-gray/15 text-waikawaGray hover:bg-gray/35 cursor-pointer";
+    ? "bg-white text-primaryText focus:border focus:border-blue focus:ring-[1.5px] focus:ring-blue/25 shadow-mini"
+    : "bg-gray/15 text-waikawaGray hover:bg-gray/35";
   const iconColor = isActive ? "text-tangerine" : "text-manateeGray";
 
   return (
-    <div
+    <Reorder.Item
       ref={ref}
+      as="div"
+      value={page}
       role="button"
       className={`${defaultPillClasses} ${pillColors}`}
-      onClick={(e) => {
+      onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.preventDefault();
         onClick(id);
         setIsSettingsOpen(false);
       }}>
       <Icon className={`${iconColor} size-5 mr-1.5`} />
 
-      {children}
+      {text}
 
       {isActive ? (
         <>
@@ -62,7 +63,7 @@ const Pill = ({ children, id, type, onClick, isActive = false }: Props) => {
           <SettingsOptions containerRef={ref} isOpen={isSettingsOpen} />
         </>
       ) : null}
-    </div>
+    </Reorder.Item>
   );
 };
 

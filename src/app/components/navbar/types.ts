@@ -4,4 +4,11 @@ enum PageTypes {
   Ending = "ending",
 }
 
-export { PageTypes };
+interface IPage {
+  id: number;
+  type: PageTypes;
+  isActive: boolean;
+  text: string;
+}
+
+export { PageTypes, IPage };
