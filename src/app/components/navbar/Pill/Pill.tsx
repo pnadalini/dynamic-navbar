@@ -35,35 +35,39 @@ const Pill = ({ page, onClick }: Props) => {
   const iconColor = isActive ? "text-tangerine" : "text-manateeGray";
 
   return (
-    <Reorder.Item
-      ref={ref}
-      as="div"
-      value={page}
-      role="button"
-      className={`${defaultPillClasses} ${pillColors}`}
-      onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        e.preventDefault();
-        onClick(id);
-        setIsSettingsOpen(false);
-      }}>
-      <Icon className={`${iconColor} size-5 mr-1.5`} />
+    <>
+      <Reorder.Item
+        ref={ref}
+        as="div"
+        value={page}
+        role="button"
+        className={`${defaultPillClasses} ${pillColors}`}
+        onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+          e.preventDefault();
+          onClick(id);
+          setIsSettingsOpen(false);
+        }}>
+        <Icon className={`${iconColor} size-5 mr-1.5`} />
 
-      {text}
+        {text}
 
-      {isActive ? (
-        <>
-          <button
-            className="ml-1.5 cursor-pointer"
-            onClick={(e) => {
-              e.stopPropagation();
-              setIsSettingsOpen(!isSettingsOpen);
-            }}>
-            <EllipsisVerticalIcon className="size-6 text-gray" />
-          </button>
-          <SettingsOptions containerRef={ref} isOpen={isSettingsOpen} />
-        </>
+        {isActive ? (
+          <>
+            <button
+              className="ml-1.5 cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsSettingsOpen(!isSettingsOpen);
+              }}>
+              <EllipsisVerticalIcon className="size-6 text-gray" />
+            </button>
+          </>
+        ) : null}
+      </Reorder.Item>
+      {isSettingsOpen ? (
+        <SettingsOptions containerRef={ref} isOpen setIsOpen={setIsSettingsOpen} />
       ) : null}
-    </Reorder.Item>
+    </>
   );
 };
 
