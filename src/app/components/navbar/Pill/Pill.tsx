@@ -1,22 +1,23 @@
 import React, { useRef, useState } from "react";
-import { Reorder } from "framer-motion";
-import { IPage, PageTypes } from "../types";
-import SettingsOptions from "./SettingsOptions";
 import {
   CheckCircleIcon,
   DocumentTextIcon,
   EllipsisVerticalIcon,
   InformationCircleIcon,
 } from "@heroicons/react/24/outline";
+import { Reorder } from "framer-motion";
+import { IPage, PageTypes } from "../utils";
+import SettingsOptions from "./SettingsOptions";
 import { defaultPillClasses } from "./utils";
 
 interface Props {
   page: IPage;
   onClick: (id: number) => void;
+  isActive?: boolean;
 }
 
-const Pill = ({ page, onClick }: Props) => {
-  const { text, id, type, isActive = false } = page;
+const Pill = ({ page, onClick, isActive = false }: Props) => {
+  const { text, id, type } = page;
   const ref = useRef<HTMLDivElement>(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
