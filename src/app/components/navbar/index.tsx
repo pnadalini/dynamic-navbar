@@ -35,6 +35,7 @@ const Navbar = () => {
               onAddClick={() => {
                 addPage(index + 1);
               }}
+              showButton={index !== pages.length - 1}
             />
           </Fragment>
         ))}
