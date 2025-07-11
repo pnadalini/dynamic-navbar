@@ -9,7 +9,7 @@ const AddPageSeparator = ({ onAddClick, showButton = true }: Props) => {
   return (
     <div className="group relative flex items-center justify-center">
       <div
-        className={`relative border-silver border border-dashed w-5 ${
+        className={`relative border-silver border-t-[1.5px] border-dashed w-5 ${
           showButton ? "group-hover:w-14 transition-all duration-300" : ""
         }`}
       />
