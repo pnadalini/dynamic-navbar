@@ -60,7 +60,7 @@ const Pill = ({ page, onClick, isActive = false }: Props) => {
                 e.stopPropagation();
                 setIsSettingsOpen(!isSettingsOpen);
               }}>
-              <EllipsisVerticalIcon className="size-6 text-gray" />
+              <EllipsisVerticalIcon className="size-5 text-gray" />
             </button>
           </>
         ) : null}

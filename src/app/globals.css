@@ -8,6 +8,7 @@
   --primaryText: #1a1a1a;
   --tangerine: #f59d0e;
   --gray: #9da4b2;
+  --silver: #c0c0c0;
   --waikawaGray: #677289;
   --manateeGray: #8c93a1;
   --blue: #2f72e2;
@@ -22,6 +23,7 @@
   --color-primaryText: var(--primaryText);
   --color-tangerine: var(--tangerine);
   --color-gray: var(--gray);
+  --color-silver: var(--silver);
   --color-blue: var(--blue);
   --color-red: var(--red);
   --color-waikawaGray: var(--waikawaGray);

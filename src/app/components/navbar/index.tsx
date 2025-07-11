@@ -1,8 +1,9 @@
 "use client";
-import { useRef, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { Reorder } from "framer-motion";
 import Pill from "./Pill/Pill";
+import AddPageSeparator from "./AddPageSeparator/AddPageSeparator";
 import { defaultPillClasses } from "./Pill/utils";
 import { getNextPage, initialActivePage, initialPages } from "./utils";
 
@@ -11,37 +12,36 @@ const Navbar = () => {
   const [activePageId, setActivePageId] = useState(initialActivePage);
   const ref = useRef(null);
 
-  const addPage = () => {
+  const addPage = (pagePosition?: number) => {
     const nextItem = getNextPage(pages);
 
     if (nextItem) {
       setActivePageId(nextItem.id);
-      setPages([...pages, nextItem]);
+
+      const updatedPages = pages.toSpliced(pagePosition ?? pages.length, 0, nextItem);
+      setPages(updatedPages);
     }
   };
 
   return (
     <div
       ref={ref}
-      className="flex w-full h-20 p-5 bg-aliceBlue border border-border absolute bottom-0 left-0 right-0 space-x-2 overflow-y-hidden">
-      <Reorder.Group
-        as="div"
-        className="flex space-x-2"
-        axis="x"
-        onReorder={setPages}
-        values={pages}>
-        {pages.map((page) => (
-          <Pill
-            key={page.id}
-            isActive={activePageId === page.id}
-            page={page}
-            onClick={setActivePageId}
-          />
+      className="flex w-full p-5 bg-aliceBlue border border-border absolute bottom-0 left-0 right-0 overflow-y-hidden">
+      <Reorder.Group as="div" className="flex" axis="x" onReorder={setPages} values={pages}>
+        {pages.map((page, index) => (
+          <Fragment key={page.id}>
+            <Pill isActive={activePageId === page.id} page={page} onClick={setActivePageId} />
+            <AddPageSeparator
+              onAddClick={() => {
+                addPage(index + 1);
+              }}
+            />
+          </Fragment>
         ))}
       </Reorder.Group>
       <button
         className={`${defaultPillClasses} bg-white hover:bg-white/35 text-primaryText shadow-mini min-w-28`}
-        onClick={addPage}>
+        onClick={() => addPage()}>
         <PlusIcon className="size-5 mr-1.5" />
         Add page
       </button>
