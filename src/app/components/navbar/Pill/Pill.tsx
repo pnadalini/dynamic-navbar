@@ -6,7 +6,8 @@ import {
   InformationCircleIcon,
 } from "@heroicons/react/24/outline";
 import { Reorder } from "framer-motion";
-import { IPage, PageTypes } from "../utils";
+import { PageTypes } from "../utils";
+import type { IPage } from "../utils";
 import SettingsOptions from "./SettingsOptions";
 import { defaultPillClasses } from "./utils";
 

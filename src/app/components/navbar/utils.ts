@@ -31,4 +31,5 @@ const getNextPage = (pages: IPage[]): IPage | undefined => {
   return allPages.find((page) => !pages.find((x) => x.id === page.id));
 };
 
-export { PageTypes, IPage, initialPages, getNextPage, initialActivePage };
+export { PageTypes, initialPages, getNextPage, initialActivePage };
+export type { IPage };
